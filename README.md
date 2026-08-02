@@ -29,21 +29,19 @@ This npm-workspaces monorepo keeps presentation and API concerns separate. Next.
 | --- | --- |
 | `apps/web` | Next.js App Router frontend with TypeScript and Tailwind CSS |
 | `apps/api` | Express 5 REST API with TypeScript and Mongoose |
-| `docs/assignment.md` | Original assignment brief, preserved verbatim |
 | `apps/api/railway.json` | Railway build, start, and health-check configuration |
 
 ## Local setup
 
 ### Prerequisites
 
-- Node.js 22 and npm 10 or newer (`nvm use` reads the included `.nvmrc`).
+- Node.js 22 and npm 10 or newer.
 - A local MongoDB instance or a MongoDB Atlas connection string.
 
 ### Install and configure
 
 ```bash
 npm install
-npx playwright install chromium
 ```
 
 Use the annotated [`.env.example`](.env.example) to create two untracked files:
@@ -83,10 +81,6 @@ Open [http://localhost:3000](http://localhost:3000). The API listens on [http://
 | `npm run build` | Build API, then web |
 | `npm run lint` | Lint all workspaces that define a lint script |
 | `npm run typecheck` | Type-check all workspaces |
-| `npm test` | Run workspace test suites |
-| `npm run test:api` | Run API integration tests only |
-| `npm run test:e2e` | Run the Playwright browser journey |
-| `npm run check` | Run lint, type-check, tests, and production builds |
 
 ## API overview
 
@@ -115,18 +109,6 @@ Errors use one shape throughout: `{ "error": { "code": "...", "message": "...", 
 - Ownership comes only from the verified JWT. Client input can never select or replace a book owner.
 - Secrets and database credentials belong in deployment environment settings, never in Git.
 
-## Testing
-
-Run the full local release gate with:
-
-```bash
-npm run check
-```
-
-The API integration suite covers authentication and cookie behavior, invalid and expired tokens, origin checks, throttling, input validation, CRUD and filters, dashboard aggregation, author-insight tie-breaking, and cross-user isolation. The Playwright suite runs the complete responsive UI journey against a deterministic in-memory API contract fixture; the database-backed API suite independently verifies the real persistence and security boundaries.
-
-For the browser smoke check, exercise this path at mobile and desktop widths: sign up → add a book → edit it → change status → filter → delete → log out → revisit `/dashboard`. Also verify keyboard dialog operation, focus restoration, failed-mutation messaging, and session-expiry redirection.
-
 ## Deployment
 
 ### API: Railway + MongoDB Atlas
@@ -146,15 +128,9 @@ If the API service sleeps while idle, the web app treats health polling as a wak
 
 ### Release checklist
 
-- `npm run check` passes on Node 22.
 - Signup, CRUD, filtering, logout, and direct protected-route access pass against production.
 - The deployed health endpoint reports ready and data persists after refresh.
 - Production smoke test passes through Vercel's same-origin API proxy, including persistence after refresh.
-- Add final dashboard and mobile captures under `docs/screenshots/` and link them here.
-
-## Assignment
-
-The supplied brief is archived unchanged at [`docs/assignment.md`](docs/assignment.md), including its original wording and formatting. The implementation intentionally stays within that brief: no social features, external catalog, ratings, progress tracking, or password-recovery flow.
 
 ## License
 
