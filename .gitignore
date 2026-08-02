@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output and caches
+.next/
+dist/
+coverage/
+.cache/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Local environment files (keep the documented template)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Hosting provider state
+.vercel/

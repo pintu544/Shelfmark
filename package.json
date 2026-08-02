@@ -1,0 +1,36 @@
+{
+  "name": "thumbstack-personal-book-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A warm, secure personal book manager built with Next.js, Express, and MongoDB.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": "22.x",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names api,web --prefix-colors magenta,cyan \"npm run dev --workspace=@thumbstack/api\" \"npm run dev --workspace=@thumbstack/web\"",
+    "dev:api": "npm run dev --workspace=@thumbstack/api",
+    "dev:web": "npm run dev --workspace=@thumbstack/web",
+    "build": "npm run build --workspace=@thumbstack/api && npm run build --workspace=@thumbstack/web",
+    "build:api": "npm run build --workspace=@thumbstack/api",
+    "build:web": "npm run build --workspace=@thumbstack/web",
+    "start:api": "npm run start --workspace=@thumbstack/api",
+    "start:web": "npm run start --workspace=@thumbstack/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:api": "npm run test --workspace=@thumbstack/api",
+    "test:e2e": "npm run test:e2e --workspace=@thumbstack/web",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "9.2.1",
+    "next": "^16.2.12"
+  },
+  "dependencies": {
+    "vercel": "^58.4.4"
+  }
+}
