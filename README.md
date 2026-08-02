@@ -2,7 +2,7 @@
 
 A quiet place to keep a reading life organized. Shelfmark is a full-stack personal library created for the Thumbstack assignment, where readers can save books, track reading status, filter their collection, and rediscover a favorite author—all without sharing their data with other users.
 
-> **Deployment status:** [Web app — add Vercel URL](https://example.com) · [API — add Railway URL](https://example.com/api/health)
+> **Deployment status:** [Web app](https://shelfmark-swart.vercel.app) · [API health](https://api-production-be883.up.railway.app/api/health)
 
 ## Features
 
@@ -149,7 +149,7 @@ If the API service sleeps while idle, the web app treats health polling as a wak
 - `npm run check` passes on Node 22.
 - Signup, CRUD, filtering, logout, and direct protected-route access pass against production.
 - The deployed health endpoint reports ready and data persists after refresh.
-- Replace the placeholder live links at the top of this README.
+- Production smoke test passes through Vercel's same-origin API proxy, including persistence after refresh.
 - Add final dashboard and mobile captures under `docs/screenshots/` and link them here.
 
 ## Assignment
